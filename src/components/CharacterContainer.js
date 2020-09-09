@@ -4,6 +4,7 @@ import { getAlbumsByPopular, getCharacterByName, getCharactersById } from '../se
 import Title from './Title'
 import Search from './Search'
 import Pagination from './Pagination'
+import InternalPagination from './InternalPagination'
 import { number } from 'prop-types'
 
 class CharacterContainer extends React.Component {
@@ -38,7 +39,7 @@ class CharacterContainer extends React.Component {
 
     favoriteFeature = (id) => {
         const newId = this.state.favCharacters.concat(id)
-       
+
         if (this.state.favCharacters.length === 0) {
             console.log("empty! \n")
             this.setState({
@@ -93,13 +94,21 @@ class CharacterContainer extends React.Component {
     }
 
 
+    slicingPagination(indexOfFirstPost, indexOfLastPost){
+        const currentPosts = this.state.characters.slice(indexOfFirstPost, indexOfLastPost);
+        this.setState({
+            characters: currentPosts
+        })
+    }
     componentDidUpdate() {
 
     }
     //render info
     render() {
         const { isFetch, characters, pageNumber } = this.state
-        let idFav = "gg";
+        const indexOfLastPost = 1 * 10;
+        const indexOfFirstPost = indexOfLastPost - 10;
+        //slicingPagination(indexOfFirstPost, indexOfLastPost)
 
         if (isFetch) {
             return "Loading ..."
@@ -111,6 +120,10 @@ class CharacterContainer extends React.Component {
                 <Pagination paginate={this.next} />
                 <Search handleSearch={this.handleSearch}></Search>
                 <button onClick={this.showFavorites}>Favorites</button>
+                <InternalPagination 
+                    postsPerPage={10}
+                    totalPosts={this.state.characters.length}   
+                />
                 <section className="albums-container">
                     {
                         characters.map(

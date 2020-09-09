@@ -4,10 +4,14 @@ import PropTypes from 'prop-types'
 
 const Character = ({name,imageurl,species,addFav,id})=> (
     <div className="single-album">
-        <h2>{name}</h2>
-        <img src={imageurl} alt={name}></img>
-        <p >{species}</p>
-        <button onClick={() => addFav(id)} >Add Favorites</button>
+        <div className="gallery">
+            <img src={imageurl} alt={name}></img>
+            <div className="des">
+                <h2>{name}</h2>
+                <p >{species}</p>
+                <button onClick={() => addFav(id)} >Add Favorites</button>
+            </div>
+        </div>
     </div>
 )
 
