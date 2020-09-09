@@ -1,10 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 
+*{
+    justify-content: center;
+    box-sizing: border-box;
+}
+
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #022c43;
-}
+} 
 
 .title{
     display: grid;
@@ -35,16 +40,15 @@ body{
 
 
 img{
-    width: 10px;
-    height: 10px;
-    border-radius: 5px;
+    width: 200px;
+    height: 200px;
 }
 
 
 .albums-container{
     background: #053f5e;
     align-items: center;
-    box-sizing: border-box;
+    
 }
 .gallery img{
     width: 50%;
@@ -57,10 +61,14 @@ img{
 .des{
     padding: 15px;
     text-align: center;
+    color: whitesmoke;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow: ellipsis;
 }
 .single-album {
     text-align: center;
-    width: 30%;
+    width: 32%;
     float: left;
     padding: 10px;
     
@@ -68,17 +76,17 @@ img{
 
 @media only screen and (max-width: 800px){
     .single-album {
-        width: 45%;
+        width: 50%;
         margin: 6px 0;
     }
 }
-
 @media only screen and (max-width: 600px){
     .single-album {
         width: 100%;
         margin: 6px 0;
     }
 }
+
 
 .page-item{
 

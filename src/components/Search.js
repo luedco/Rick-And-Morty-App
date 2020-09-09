@@ -21,6 +21,7 @@ class Search extends React.Component{
                     onChange={this.handleChange}
                     className="search-input" 
                     type="text"
+                    placeholder="Search by Name"
                     />
                 <Button variant="outline-info" onClick={()=>{handleSearch(search)}}>Search</Button>
             </div>

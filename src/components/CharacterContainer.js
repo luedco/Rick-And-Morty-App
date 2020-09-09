@@ -40,28 +40,38 @@ class CharacterContainer extends React.Component {
 
     favoriteFeature = (id) => {
         const newId = this.state.favCharacters.concat(id)
+        //verificar si es repetido para ver si se agrega o se elimina de favoritos
+        if ( !this.verificarRepetidos(id)) {
+            //verificando que es el primero en la lista ? 
+            if (this.state.favCharacters.length == null) {
+                console.log("empty! \n")
+                this.setState({
+                    favCharacters: id
+                })
+                console.log("Lista cuando es cero",this.state.favCharacters)
+            }else{
+                if (this.state.favCharacters.length >= 5) {
+                    alert("Haz alcanzado tu limite de favoritos!")
+                    console.log("Lista limite",this.state.favCharacters)
+                }else{
+                    this.setState({
+                        favCharacters: newId
+                    })
+                    this.forceUpdate();
+                    console.log("Lista mayor cero ok",this.state.favCharacters)
+                }
+            }
 
-        if (this.state.favCharacters.length === 0) {
-            console.log("empty! \n")
-            this.setState({
-                favCharacters: id
-            })
-        }
-        if (this.state.favCharacters.length >= 5) {
-            alert("Haz alcanzado tu limite de favoritos!")
-        }
-        if (!this.verificarRepetidos(id)) {
-            this.setState({
-                favCharacters: newId
-            })
         }
         else {
             this.desFavorite(id)
+            console.log("Lista eliminar",this.state.favCharacters)
         }
-
-
     }
+
     verificarRepetidos(id) {
+        if(this.state.favCharacters.length === 0)
+            return false
         for (let i = 0; i <= this.state.favCharacters.length; i++) {
             if (this.state.favCharacters[i] === id) {
                 return true
@@ -79,17 +89,6 @@ class CharacterContainer extends React.Component {
         return false
     }
 
-    showFavorites = async () => {
-        const listString = this.state.favCharacters.toString();
-        const responseJSON = await getCharactersById(listString);
-        if(listString === ""){
-            alert("No tienes favoritos aún!")
-        }else{
-            this.setState({
-                characters: responseJSON
-            })
-        }
-    }
     handleSearch = async (search) => {
         const responseJSON = await getCharacterByName(search)
         this.setState({
@@ -117,6 +116,28 @@ class CharacterContainer extends React.Component {
     componentDidUpdate() {
 
     }
+
+    
+    showFavorites = async () => {
+        const listString = this.state.favCharacters.toString();
+        const responseJSON = await getCharactersById(listString);
+
+        if(listString === ""){
+            alert("No tienes favoritos aún!")
+        }else{
+            console.log("longitud", listString.length)
+            if(listString.length === 1 ){
+                this.setState({
+                    characters: [responseJSON]
+                })
+            }else{
+                this.setState({
+                    characters: responseJSON
+                })
+            }
+        }
+    }
+
     //render info
     render() {
         const { isFetch, characters, pageNumber } = this.state
@@ -125,10 +146,10 @@ class CharacterContainer extends React.Component {
                 <Title>¡Rick And Morty!</Title>
                 <Pagination paginate={this.next} />
                 <Search handleSearch={this.handleSearch}></Search>
-                <Button onClick={this.showFavorites} variant="outline-info">Favorites</Button>
+                <Button onClick={this.showFavorites} variant="outline-info">Favorite List</Button>
                 <section className="albums-container">
                     {
-                        characters.map(
+                        this.state.characters.map(
                             (character) =>
                                 <p className="album-href">
                                     <Character
@@ -136,7 +157,7 @@ class CharacterContainer extends React.Component {
                                         name={character["name"]}
                                         species={character["species"]}
                                         id={character.id}
-                                        nep={character.episode}
+                                        neps={character.episode}
                                         addFav={this.favoriteFeature}
                                     />
                                 </p>

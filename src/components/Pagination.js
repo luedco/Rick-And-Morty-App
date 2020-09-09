@@ -6,12 +6,13 @@ import { ListGroup } from 'react-bootstrap';
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 1; i <= 34; i++) {
     pageNumbers.push(i);
   }
 
   return (
     <nav>
+      
       <ul className='pagination'>
         {pageNumbers.map(number => (
           <li key={number} className='page-item'>
