@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
+body{
+    font-family: 'Roboto', sans-serif;
+    background-color: #022c43;
+}
+
+.title{
+    display: grid;
+    justify-content: center;
+    font-size: 45px;
+    font-style: italic;
+    color: #e4e3e3;
+}
+.search-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   padding: 5px;
+}
+.search-input .search-btn{
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.search-input{
+    padding: 3px 8px;
+    width: calc(30% - 2em);
+    margin: 0 8px;
+    margin: 10px;
+}
+
+img{
+    width: 200px;
+    height: 200px;
+    margin:0;
+}
+.albums-container{
+    background: #053f5e;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
+.single-album {
+    flex-shrink: 1;
+    flex-basis: 24%;
+    text-align: center;
+    color: #FFF;
+}
+
+.album-href{
+    text-decoration: none;
+}
