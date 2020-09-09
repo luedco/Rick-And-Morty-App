@@ -4,8 +4,8 @@ import { getAlbumsByPopular, getCharacterByName, getCharactersById } from '../se
 import Title from './Title'
 import Search from './Search'
 import Pagination from './Pagination'
-import InternalPagination from './InternalPagination'
 import { number } from 'prop-types'
+import Button from 'react-bootstrap/Button';
 
 class CharacterContainer extends React.Component {
     constructor(props) {
@@ -27,6 +27,7 @@ class CharacterContainer extends React.Component {
         this.setState(
             { characters: responseJSON.results, isFetch: false, }
         )
+        
     }
 
     next = async (pageNumber) => {
@@ -81,9 +82,13 @@ class CharacterContainer extends React.Component {
     showFavorites = async () => {
         const listString = this.state.favCharacters.toString();
         const responseJSON = await getCharactersById(listString);
-        this.setState({
-            characters: responseJSON
-        })
+        if(listString === ""){
+            alert("No tienes favoritos aún!")
+        }else{
+            this.setState({
+                characters: responseJSON
+            })
+        }
     }
     handleSearch = async (search) => {
         const responseJSON = await getCharacterByName(search)
@@ -94,11 +99,20 @@ class CharacterContainer extends React.Component {
     }
 
 
-    slicingPagination(indexOfFirstPost, indexOfLastPost){
-        const currentPosts = this.state.characters.slice(indexOfFirstPost, indexOfLastPost);
+    async paginate(pageNumber){
+        //console.log("page number",pageNumber)
+
+        let indexOfLastPost = pageNumber *10;
+        let indexOfFirstPost = indexOfLastPost - 10;
+        console.log(" page #",pageNumber,"chars",this.state.characters)
+        alert("")
+        /*const posts = this.state.characters
+        
+        const currentPosts = posts.slice(indexOfFirstPost,indexOfLastPost);
         this.setState({
-            characters: currentPosts
-        })
+            characters: currentPosts,
+            pageNumber: pageNumber
+        })*/
     }
     componentDidUpdate() {
 
@@ -106,24 +120,12 @@ class CharacterContainer extends React.Component {
     //render info
     render() {
         const { isFetch, characters, pageNumber } = this.state
-        const indexOfLastPost = 1 * 10;
-        const indexOfFirstPost = indexOfLastPost - 10;
-        //slicingPagination(indexOfFirstPost, indexOfLastPost)
-
-        if (isFetch) {
-            return "Loading ..."
-        }
-        //const name = this.state.albums[0].title.label
         return (
             <React.Fragment>
-                <Title>iTunes App</Title>
+                <Title>¡Rick And Morty!</Title>
                 <Pagination paginate={this.next} />
                 <Search handleSearch={this.handleSearch}></Search>
-                <button onClick={this.showFavorites}>Favorites</button>
-                <InternalPagination 
-                    postsPerPage={10}
-                    totalPosts={this.state.characters.length}   
-                />
+                <Button onClick={this.showFavorites} variant="outline-info">Favorites</Button>
                 <section className="albums-container">
                     {
                         characters.map(
@@ -134,6 +136,7 @@ class CharacterContainer extends React.Component {
                                         name={character["name"]}
                                         species={character["species"]}
                                         id={character.id}
+                                        nep={character.episode}
                                         addFav={this.favoriteFeature}
                                     />
                                 </p>

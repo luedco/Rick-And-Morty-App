@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
 body{
     font-family: 'Roboto', sans-serif;
     background-color: #022c43;
@@ -34,8 +35,8 @@ body{
 
 
 img{
-    width: 200px;
-    height: 200px;
+    width: 10px;
+    height: 10px;
     border-radius: 5px;
 }
 
@@ -46,10 +47,13 @@ img{
     box-sizing: border-box;
 }
 .gallery img{
-    width: 60%;
+    width: 50%;
     height: auto;
 }
-
+.gallery{
+    border: 1px solid;
+    border-radius: 5px;
+}
 .des{
     padding: 15px;
     text-align: center;
@@ -58,19 +62,38 @@ img{
     text-align: center;
     width: 30%;
     float: left;
-    padding: 0 6px;
+    padding: 10px;
+    
 }
 
-@media only screen and (max-width: 700px){
+@media only screen and (max-width: 800px){
     .single-album {
         width: 45%;
         margin: 6px 0;
     }
 }
 
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 600px){
     .single-album {
         width: 100%;
         margin: 6px 0;
     }
+}
+
+.page-item{
+
+    display: inline-block;
+    padding-left:3px;
+    padding-right:3px;
+    
+}
+
+.page-link{
+    text-decoration: none;
+    background:#022c43;
+    border: none;
+}
+
+.fav-btn{
+
 }

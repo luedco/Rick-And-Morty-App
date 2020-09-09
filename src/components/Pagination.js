@@ -1,9 +1,12 @@
 import React from 'react';
+import { ListGroup } from 'react-bootstrap';
+
+
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   const pageNumbers = [];
 
-  for (let i = 1; i <= 34; i++) {
+  for (let i = 1; i <= 14; i++) {
     pageNumbers.push(i);
   }
 
@@ -18,6 +21,7 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
           </li>
         ))}
       </ul>
+      
     </nav>
   );
 };

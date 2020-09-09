@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import Button from 'react-bootstrap/Button';
 class Search extends React.Component{
     constructor(props){
         super(props)
@@ -22,7 +22,7 @@ class Search extends React.Component{
                     className="search-input" 
                     type="text"
                     />
-                <button className="search-btn" onClick={()=>{handleSearch(search)}}>Search</button>
+                <Button variant="outline-info" onClick={()=>{handleSearch(search)}}>Search</Button>
             </div>
         )
     }

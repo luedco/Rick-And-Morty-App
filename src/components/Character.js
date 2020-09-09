@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import Button from 'react-bootstrap/Button';
 
 const Character = ({name,imageurl,species,addFav,id})=> (
     <div className="single-album">
@@ -9,7 +9,7 @@ const Character = ({name,imageurl,species,addFav,id})=> (
             <div className="des">
                 <h2>{name}</h2>
                 <p >{species}</p>
-                <button onClick={() => addFav(id)} >Add Favorites</button>
+                <Button variant="outline-info" onClick={() => addFav(id)}>Add</Button>
             </div>
         </div>
     </div>
