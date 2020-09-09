@@ -39,6 +39,7 @@ class CharacterContainer extends React.Component {
     }
 
     favoriteFeature = (id) => {
+        this.forceUpdate();
         const newId = this.state.favCharacters.concat(id)
         //verificar si es repetido para ver si se agrega o se elimina de favoritos
         if ( !this.verificarRepetidos(id)) {
@@ -82,11 +83,11 @@ class CharacterContainer extends React.Component {
     desFavorite(id) {
         for (let i = 0; i <= this.state.favCharacters.length; i++) {
             if (this.state.favCharacters[i] === id) {
-                this.state.favCharacters.splice(i, 1);
-                return true;
+                this.state.favCharacters.splice(i, 1)
+                this.forceUpdate();
+               
             }
         }
-        return false
     }
 
     handleSearch = async (search) => {
@@ -124,6 +125,7 @@ class CharacterContainer extends React.Component {
 
         if(listString === ""){
             alert("No tienes favoritos aún!")
+            this.componentDidMount()
         }else{
             console.log("longitud", listString.length)
             if(listString.length === 1 ){
@@ -146,7 +148,7 @@ class CharacterContainer extends React.Component {
                 <Title>¡Rick And Morty!</Title>
                 <Pagination paginate={this.next} />
                 <Search handleSearch={this.handleSearch}></Search>
-                <Button onClick={this.showFavorites} variant="outline-info">Favorite List</Button>
+                <Button onClick={this.showFavorites} variant="outline-info" className="fav-list-btn">Favorite List</Button>
                 <section className="albums-container">
                     {
                         this.state.characters.map(

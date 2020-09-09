@@ -48,7 +48,7 @@ img{
 .albums-container{
     background: #053f5e;
     align-items: center;
-    
+    padding: 0 10%;
 }
 .gallery img{
     width: 50%;
@@ -102,6 +102,8 @@ img{
     border: none;
 }
 
-.fav-btn{
-
+.fav-list-btn{
+    width: 200px;
+    color: rebeccapurple;
+    float: right;
 }
