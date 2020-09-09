@@ -17,8 +17,8 @@ export async function getCharacterByName(name){
 }
 
 //cambiar a obtener varios
-export async function getCharacterById(id){
-    const response = await fetch(`${baseurl}/${id}`)
+export async function getCharactersById(listId){
+    const response = await fetch(`${baseurl}/${listId}`)
     const responseJSON = await response.json()
     return responseJSON
 }
