@@ -6,7 +6,7 @@ import Search from './Search'
 import Pagination from './Pagination'
 import { number } from 'prop-types'
 import Button from 'react-bootstrap/Button';
-
+import Favorites from './Favorites';
 class CharacterContainer extends React.Component {
     constructor(props) {
         super(props)
@@ -58,15 +58,20 @@ class CharacterContainer extends React.Component {
                     this.setState({
                         favCharacters: newId
                     })
-                    this.forceUpdate();
                     console.log("Lista mayor cero ok",this.state.favCharacters)
                 }
             }
 
         }
         else {
-            this.desFavorite(id)
-            console.log("Lista eliminar",this.state.favCharacters)
+           /* this.desFavorite(id)
+            console.log("Lista eliminar",this.state.favCharacters)*/
+            for (let i = 0; i <= this.state.favCharacters.length; i++) {
+                if (this.state.favCharacters[i] === id) {
+                    this.state.favCharacters.splice(i, 1)
+                   
+                }
+            }
         }
     }
 
@@ -84,7 +89,6 @@ class CharacterContainer extends React.Component {
         for (let i = 0; i <= this.state.favCharacters.length; i++) {
             if (this.state.favCharacters[i] === id) {
                 this.state.favCharacters.splice(i, 1)
-                this.forceUpdate();
                
             }
         }
@@ -97,8 +101,6 @@ class CharacterContainer extends React.Component {
         })
 
     }
-
-
     async paginate(pageNumber){
         //console.log("page number",pageNumber)
 
@@ -146,9 +148,11 @@ class CharacterContainer extends React.Component {
         return (
             <React.Fragment>
                 <Title>¡Rick And Morty!</Title>
-                <Pagination paginate={this.next} />
+                <Pagination paginate={this.next} className="ls-pagination"/>
+                <div className="search-fav">
                 <Search handleSearch={this.handleSearch}></Search>
-                <Button onClick={this.showFavorites} variant="outline-info" className="fav-list-btn">Favorite List</Button>
+                <Button onClick={this.showFavorites} variant="outline-info" className="fav-list-btn"><a href="">Favorites</a></Button>
+                </div>
                 <section className="albums-container">
                     {
                         this.state.characters.map(

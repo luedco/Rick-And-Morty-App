@@ -16,6 +16,7 @@ class Search extends React.Component{
         const {search} = this.state
         return(
             <div className="search-container">
+                
                 <input
                     value={search}
                     onChange={this.handleChange}
